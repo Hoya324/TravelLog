@@ -16,7 +16,7 @@
       <div class="list_area">
         <% list.reverse().forEach((travel) => { %>
           <p>
-            <a href="/user/<%= travel.dataValues.id %>/record">
+            <a href="/record/<%= travel.dataValues.id %>">
               <%= travel.dataValues.name %> | <%= travel.dataValues.address ? travel.dataValues.address : '(주소 미제공)' %>
             </a>
             <button class="remove_button" onclick="removeTravel('<%= travel.dataValues.TravelId %>')">

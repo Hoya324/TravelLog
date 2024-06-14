@@ -8,6 +8,8 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 const index_router = require("./routes/index");
 const user_router = require("./routes/user");
+const record_router = require("./routes/record");
+const list_router = require("./routes/list");
 dotenv.config();
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
@@ -61,6 +63,8 @@ app.use(passport.session());
 
 app.use("/", index_router);
 app.use("/user", user_router);
+app.use("/record", record_router);
+app.use("/user/list", list_router);
 
 // 404 에러
 app.use((req, res, next) => {

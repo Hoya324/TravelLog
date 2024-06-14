@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const sequelize = require("sequelize");
-const { User, List, Travel, Record } = require("../models");
+const { User } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./auth");
 
 // 로그인
@@ -80,44 +79,6 @@ router.route("/find/password").post(async (req, res) => {
   }
 });
 
-// 여행지 리스트 페이지
-router.route("/list")
-  .get(async (req, res) => {
-    const user = req.user ? req.user : null;
-    try {
-      const UserId = req.user.dataValues.id ? req.user.dataValues.id : null;
-      const list = await List.findAll({ where: { UserId } });
-      console.log(list);
-      res.render("list", { user, list });
-    } catch (err) {
-      console.error(err);
-    }
-  })
-  .post(async (req, res) => {
-    try {
-      const { name, address, phone } = req.body;
-      await Travel.create({ name, address, phone });
-      const travel = await Travel.findOne({ where: { name, address, phone } });
-      await List.create({ name, address, phone, UserId: req.user.dataValues.id, TravelId: travel.id });
-      return res.send("<script>alert('여행지이 저장되었습니다.');location.href='/search';</script>");
-    } catch (err) {
-      console.error(err);
-      return res.send("<script>alert('여행지 저장에 실패하였습니다.');location.href='/search';</script>");
-    }
-  });
-
-// 여행지 삭제
-router.delete("/list/:id", async (req, res) => {
-  const travelId = req.params.id;
-  try {
-    await List.destroy({ where: { TravelId: travelId } });
-    return res.send("<script>alert('삭제되었습니다.');location.href='/user/list';</script>");
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
-  }
-});
-
 // 내정보
 router.route("/myinfo")
   .get((req, res) => {
@@ -138,143 +99,6 @@ router.route("/myinfo")
       console.log(err);
     }
   });
-
-// 기록 작성 페이지로 이동
-router.get('/:travelId/record', isLoggedIn, async (req, res, next) => {
-  try {
-    const travel = await Travel.findByPk(req.params.travelId);
-    if (!travel) {
-      return res.status(404).send('Travel not found');
-    }
-    const record = await Record.findOne({
-      where: {
-        travelId: req.params.travelId,
-        userId: req.user.id
-      }
-    });
-
-    if (!record) {
-      res.render('record', {
-        travel,
-        user: req.user,
-        record,
-        createdAt: record ? formatDate(record.createdAt.toString()) : null,
-        updatedAt: record ? formatDate(record.updatedAt.toString()) : null,
-        withWhom: record ? record.with : null
-      });
-    } else {
-      res.render('edit_record', {
-        travel,
-        user: req.user,
-        record,
-        createdAt: record ? formatDate(record.createdAt.toString()) : null,
-        updatedAt: record ? formatDate(record.updatedAt.toString()) : null,
-        withWhom: record ? record.with : null
-      });
-    }
-
-  } catch (err) {
-    next(err);
-  }
-});
-
-// 기록 저장
-router.post('/:travelId/record', isLoggedIn, async (req, res, next) => {
-  try {
-    const { content, withWhom } = req.body;
-    const userId = req.user.id;
-    const travelId = req.params.travelId;
-
-    let record = await Record.findOne({
-      where: {
-        userId,
-        travelId
-      }
-    });
-
-    if (record) {
-      await record.update({ content, with: withWhom });
-    } else {
-      await Record.create({ content, userId, travelId, with: withWhom });
-    }
-
-    res.redirect(`/user/${travelId}/record/edit`);
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
-});
-
-// 저장된 기록 페이지로 이동
-router.get('/:travelId/record/rewrite', isLoggedIn, async (req, res, next) => {
-  try {
-    const travel = await Travel.findByPk(req.params.travelId);
-    if (!travel) {
-      return res.status(404).send('Travel not found');
-    }
-    const record = await Record.findOne({
-      where: {
-        travelId: req.params.travelId,
-        userId: req.user.id
-      }
-    });
-
-    res.render('record', {
-      travel,
-      user: req.user,
-      record,
-      createdAt: record ? formatDate(record.createdAt.toString()) : null,
-      updatedAt: record ? formatDate(record.updatedAt.toString()) : null,
-      withWhom: record ? record.with : null
-    });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// 기록 편집 페이지로 이동
-router.get('/:travelId/record/edit', isLoggedIn, async (req, res, next) => {
-  try {
-    const travel = await Travel.findByPk(req.params.travelId);
-    if (!travel) {
-      return res.status(404).send('Travel not found');
-    }
-    const record = await Record.findOne({
-      where: {
-        travelId: req.params.travelId,
-        userId: req.user.id
-      }
-    });
-
-    if (!record) {
-      res.render('record', {
-        travel,
-        user: req.user,
-        record,
-        createdAt: record ? formatDate(record.createdAt.toString()) : null,
-        updatedAt: record ? formatDate(record.updatedAt.toString()) : null,
-        withWhom: record ? record.with : null
-      });
-    } else {
-      res.render('edit_record', {
-        travel,
-        user: req.user,
-        record,
-        createdAt: record ? formatDate(record.createdAt.toString()) : null,
-        updatedAt: record ? formatDate(record.updatedAt.toString()) : null,
-        withWhom: record ? record ? record.with : null : null
-      });
-    }
-
-  } catch (err) {
-    next(err);
-  }
-});
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}, ${date.getHours()}시 ${date.getMinutes()}분`;
-}
 
 // 회원탈퇴
 router.delete("/withdraw", isLoggedIn, async (req, res) => {
