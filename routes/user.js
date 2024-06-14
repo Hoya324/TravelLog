@@ -59,26 +59,6 @@ router.route("/signup")
     }
   });
 
-// 비밀번호 찾기
-router.route("/find/password").post(async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ where: { email } });
-    if (user) {
-      const newPassword = Math.random().toString(36).slice(2);
-      const info = { toEmail: email, subject: "임시 비밀번호 발급", text: `임시 비밀번호는 ${newPassword}입니다.` };
-      const hash = await bcrypt.hash(newPassword, 12);
-      await User.update({ password: hash }, { where: { email } });
-      mailSender.sendMail(info);
-      return res.send("<script>alert('임시 비밀번호가 발급되었습니다.');location.href='/user/login';</script>");
-    } else {
-      return res.send("<script>alert('사용자 정보가 존재하지 않습니다.');location.href='/user/login';</script>");
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 // 내정보
 router.route("/myinfo")
   .get((req, res) => {

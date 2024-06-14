@@ -63,6 +63,7 @@
   font-size: 17px;
   font-weight: 500;
   color: white;
+  cursor: grab;
   background-color: rgb(65, 126, 169);
 }
 
@@ -110,7 +111,7 @@
   height: 40px;
   width: 320px;
   padding: 10px 15px;
-  /* margin: 10px 0; */
+  cursor: grab;
   border: 1px solid #fee500;
   border-radius: 5px;
   font-size: 17px;
