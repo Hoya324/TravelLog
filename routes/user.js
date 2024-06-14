@@ -2,7 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
-const { isLoggedIn, isNotLoggedIn } = require("./auth");
+const { isLoggedIn, isNotLoggedIn } = require("../passport/auth");
 
 // 로그인
 router.route("/login")

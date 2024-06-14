@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { isLoggedIn } = require("./auth");
+const { isLoggedIn } = require("../passport/auth");
 const { List, Travel } = require("../models");
 
 // 여행지 리스트 페이지

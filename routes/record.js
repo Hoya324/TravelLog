@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { isLoggedIn } = require("./auth");
+const { isLoggedIn } = require("../passport/auth");
 const { Travel, Record } = require("../models");
 
 // 기록 작성 페이지로 이동
