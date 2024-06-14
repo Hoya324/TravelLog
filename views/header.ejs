@@ -1,0 +1,15 @@
+<header class="header">
+    <nav class="nav">
+      <a href="/search" class="logo"><img class="marker"src="/logo.png" alt=""></a>
+      <ul class="nav_ul">
+        <% if (user) { %>
+        <li class="nav_li"><a href="/user/list" class="nav_link">여행 기록지</a></li>
+        <li class="nav_li"><a href="/user/myinfo" class="nav_link">내 정보</a></li>
+        <li class="nav_li"><a href="/user/logout" class="nav_link">로그아웃</a></li>
+        <% } else { %>
+        <li class="nav_li"><a href="/user/signup" class="nav_link">회원가입</a></li>
+        <li class="nav_li"><a href="/user/login" class="nav_link">로그인</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header> 

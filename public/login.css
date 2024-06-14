@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Work+Sans:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Yeon+Sung&display=swap");
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 500px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  margin-top: 60px;
+}
+.container a {
+    text-decoration: none;
+}
+
+.container h1 {
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 80px;
+  font-weight: 700;
+  color: rgb(65, 126, 169)
+
+}
+
+.container p {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 450;
+    margin-top: -30px;
+}   
+
+.local_area {
+  margin-top: 55px;
+  width: 100%;
+}
+
+.input {
+  height: 23px;
+  width: 300px;
+  padding: 10px 10px;
+  margin: 5px 0 10px;
+  border: 1px solid #d7e2eb;
+  background-color: #fbfbfd;
+  border-radius: 5px;
+  font-size: 17px;
+  outline: none;
+}
+
+.input::placeholder {
+  opacity: 0.5;
+}
+
+.login_button {
+  height: 40px;
+  width: 320px;
+  padding: 10px 15px;
+  margin: 10px 0px;
+  border: 1px solid rgb(65, 126, 169);
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+  background-color: rgb(65, 126, 169);
+}
+
+.others_area {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.others_area p {
+  opacity: 0.5;
+}
+
+.others_area button {
+  text-decoration: none;
+}
+
+.others_area button:hover {
+  text-decoration: underline;
+}
+
+.link {
+  height: 25px;
+  width: 100%;
+  font-size: 15px;
+  color: rgb(65, 126, 169);
+  padding-top: 40px;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font-weight:600;
+}
+
+.or {
+  opacity: 0.7;
+}
+
+.kakao_area {
+  width: 100%;
+}
+
+.kakao_button {
+  height: 40px;
+  width: 320px;
+  padding: 10px 15px;
+  /* margin: 10px 0; */
+  border: 1px solid #fee500;
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight: 500;
+  color: black;
+  background-color: #fee500;
+}
+

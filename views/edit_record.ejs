@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Record</title>
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/record.css">
+</head>
+<body>
+<%- include('header', { user: user }) %>
+<div class="container">
+    <div class="wrap">
+        <h1><%= travel.name %> 에서의 기록</h1>
+        <% if (createdAt) { %>
+            <p>생성: <%= createdAt %></p>
+        <% } %>
+        <% if (updatedAt) { %>
+            <p>수정: <%= updatedAt %></p>
+        <% } %>
+        <% if (withWhom) { %>
+            <p><%= withWhom %>와 함께</p>
+        <% } %>
+
+        <div class="input-row">
+            <label for="content">기록</label>
+            <br>
+            <div name="content" id="content" cols="30" rows="10"><%= record ? record.content : '' %></div>
+        </div>
+        <a href="/user/<%= travel.dataValues.id %>/record/rewrite">
+                <button type="submit">편집</button>
+        </a>
+    </div>
+</div>
+</body>
+</html>

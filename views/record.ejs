@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Record</title>
+  <link rel="stylesheet" href="/header.css">
+  <link rel="stylesheet" href="/record.css">
+</head>
+<body>
+<%- include('header', { user: user }) %>
+<div class="container">
+  <div class="wrap">
+    <h1><%= travel.name %>에서의 기록 저장/편집</h1>
+    <% if (createdAt) { %>
+      <p>생성: <%= createdAt %></p>
+    <% } %>
+    <% if (updatedAt) { %>
+      <p>수정: <%= updatedAt %></p>
+    <% } %>
+    <form action="/user/<%= travel.id %>/record" method="POST">
+      <div class="input-row">
+        <label for="content">내용:</label>
+        <textarea name="content" id="content" cols="30" rows="10"><%= record ? record.content : '' %></textarea>
+      </div>
+      <div class="input-row">
+        <label for="withWhom">누구와 함께하셨나요?</label>
+        <select name="withWhom" id="withWhom">
+          <option value="혼자" <%= record && record.with === '혼자' ? 'selected' : '' %>>혼자</option>
+          <option value="연인·배우자" <%= record && record.with === '연인·배우자' ? 'selected' : '' %>>연인·배우자</option>
+          <option value="친구" <%= record && record.with === '친구' ? 'selected' : '' %>>친구</option>
+          <option value="지인·동료" <%= record && record.with === '지인·동료' ? 'selected' : '' %>>지인·동료</option>
+          <option value="가족" <%= record && record.with === '가족' ? 'selected' : '' %>>가족</option>
+          <option value="기타" <%= record && record.with === '기타' ? 'selected' : '' %>>기타</option>
+        </select>
+      </div>
+      <div class="">
+        <button type="submit">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

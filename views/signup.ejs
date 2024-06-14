@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/signup.css">
+  <link rel="stylesheet" href="/header.css">
+  <script defer src="/signup.js"></script>
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <title>회원가입 페이지</title>
+</head>
+
+<body>
+  <%- include('./header')%>
+  <div class="wrap">
+    <div class="container">
+      <h1>회원가입</h1>
+      <div class="signup_area">
+        <form action="/user/signup" method="post" class="signup_form" id="signup_form" autocomplete="off">
+          <div class="input_area">
+            <label for="name">닉네임</label>
+            <div>
+              <input type="text" name="nickname" id="nickname" placeholder="사용할 이름이나 별칭을 입력해주세요." class="input" required>
+            </div>
+            <label for="emaiol">이메일</label>
+            <div>
+              <input type="email" name="email" id="email" placeholder="이메일 형식에 맞게 입력해주세요." class="input" required>
+            </div>
+            <label for="password">비밀번호</label>
+            <div>
+              <input type="password" name="password" id="password" placeholder="8자리 이상 입력해주세요." class="input" required
+                autocomplete="off">
+            </div>
+            <label for="pw_check">비밀번호 확인</label>
+            <div>
+              <input type="password" name="pw_check" id="pw_check" placeholder="비밀번호 확인" class="input" required
+                autocomplete="off">
+              <p id="check_text" class="check_text"></p>
+            </div>
+          </div>
+          <button type="submit" id="signup_button" class="signup_button" disabled="true">가입하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

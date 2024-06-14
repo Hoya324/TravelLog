@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/list.css" />
+    <link rel="stylesheet" href="/header.css" />
+    <title>My Page</title>
+    <style>
+      .edit_button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./header') %>
+    <div class="wrapp">
+      <div class="wrap">
+        <div style="overflow: scroll" class="list_wrap">
+          <div class="list_area">
+            <div class="title">
+              <p style="text-align: center">My Page</p>
+            </div>
+            <hr />
+            <p>
+              이름: &nbsp;<span
+                id="name"
+                style="font-size: 25px; font-weight: 450"
+                ><%= user.dataValues.nickname %></span
+              >
+              <button class="edit_button" onclick="editName()">
+                <img class="edit" src="/edit.png" alt="" />
+              </button>
+            </p>
+            <hr />
+            <p>
+              이메일: &nbsp;<span
+                id="email"
+                style="font-size: 25px; font-weight: 450"
+                ><%= user.dataValues.email %></span
+              >
+              <!-- <button class="edit_button" onclick="editEmail()">
+                <img class="edit" src="/edit.png" alt="" />
+              </button> -->
+            </p>
+            <hr />
+
+            <div class="buttons">
+              <button onclick="editPassword()" style="padding-right: 10px;">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front text"> 비밀번호 변경 </span>
+              </button>
+
+              <button onclick="withdraw()" >
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front text"> 회원 탈퇴 </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/list.js"></script>
+</html>

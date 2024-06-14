@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Work+Sans:wght@500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Yeon+Sung&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+@font-face {
+  font-family: 'InkLipquid';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header {
+    border-bottom: 2px solid #cfd7e0;
+}
+.logo {
+    font-family: 'InkLipquid';
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: 600;
+    color: #000000
+}
+.marker {
+    width: 65px;
+    height: 65px;
+}
+.nav {
+    width: 70%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+  } 
+  .nav_ul {
+    padding: 0px 5px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .nav_li {
+    margin: 0px 10px;
+  }
+  
+  .nav_link {
+    font-family: "Noto Sans KR", sans-serif;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    font-weight: 400;
+  }
+
+  .nav_link:hover {
+    color: rgb(0, 132, 255);
+  }
